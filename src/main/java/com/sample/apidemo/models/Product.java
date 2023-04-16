@@ -1,11 +1,17 @@
-package com.sample.apidemo.model;
+package com.sample.apidemo.models;
+
+import java.util.Calendar;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 /**
  * @author BAO
@@ -15,12 +21,15 @@ import jakarta.persistence.Table;
 @Table(name = "tblProduct")
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "product_sequence1", sequenceName = "product_sequence2", allocationSize = 5)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sequence1")
 	private Long id;
 
 	@Column(nullable = false, unique = true, length = 300)
 	private String productName;
 	@Column(name = "yearr")
+	@Min(1950)
+	@Max(2023)
 	private int year;
 	private Double price;
 	private String url;
@@ -28,8 +37,14 @@ public class Product {
 	public Product() {
 		super();
 	}
-	
+
 //	calculated field = transient
+	@Transient
+	private int age;// age is calculated from "year"
+
+	public int getAge() {
+		return Calendar.getInstance().get(Calendar.YEAR) - year;
+	}
 
 	public Product(String productName, int year, Double price, String url) {
 		this.productName = productName;

@@ -1,4 +1,4 @@
-package com.sample.apidemo.model;
+package com.sample.apidemo.models;
 
 public class ResponseObject {
 	private String status;

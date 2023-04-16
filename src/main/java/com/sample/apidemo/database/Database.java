@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sample.apidemo.model.Product;
+import com.sample.apidemo.models.Product;
 import com.sample.apidemo.repositories.ProductRepository;
 
 @Configuration
