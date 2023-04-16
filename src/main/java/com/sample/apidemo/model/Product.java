@@ -1,24 +1,26 @@
 package com.sample.apidemo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * @author BAO
  *
  */
 @Entity
+@Table(name = "tblProduct")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = false, unique = true, length = 300)
 	private String productName;
-	@Column(name = "years")
+	@Column(name = "yearr")
 	private int year;
 	private Double price;
 	private String url;
@@ -26,6 +28,8 @@ public class Product {
 	public Product() {
 		super();
 	}
+	
+//	calculated field = transient
 
 	public Product(String productName, int year, Double price, String url) {
 		this.productName = productName;
@@ -109,7 +113,5 @@ public class Product {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
 
 }
